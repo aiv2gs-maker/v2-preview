@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VVWG | V2 WELLNESS GROUP — Tsim Sha Tsui Private Practice</title>
+  
+  <!-- Google Fonts: Inter, Noto Sans TC, IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       RESET & BASE STYLES
+       Pure Black Modernist Aesthetics (Swiss / Raum Objects style)
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0px !important; /* Strict 0px radius rule */
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #000000;
+      color: #D4D4D4;
+      font-family: 'Inter', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Selection styling */
+    ::selection {
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+
+    /* Links */
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      outline: none;
+    }
+
+    /* Font Utilities */
+    .font-mono {
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* Language display system */
+    body.lang-zh .lang-en { display: none !important; }
+    body.lang-zh .lang-zh { display: inline; }
+    body.lang-zh .lang-zh.block { display: block; }
+    body.lang-zh .lang-zh.flex { display: flex; }
+    body.lang-zh .lang-zh.grid { display: grid; }
+
+    body.lang-en .lang-zh { display: none !important; }
+    body.lang-en .lang-en { display: inline; }
+    body.lang-en .lang-en.block { display: block; }
+    body.lang-en .lang-en.flex { display: flex; }
+    body.lang-en .lang-en.grid { display: grid; }
+
+    /* Layout Containers */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    @media (min-width: 768px) {
+      .container {
+        padding: 0 48px;
+      }
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION (Fixed 2-row layout)
+       ========================================================================== */
+    .header-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.96);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid #222222;
+    }
+
+    .header-row-1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      border-bottom: 1px solid #141414;
+    }
+    @media (min-width: 768px) {
+      .header-row-1 {
+        padding: 14px 48px;
+      }
+    }
+
+    .brand-logo {
+      font-size: clamp(13px, 3.6vw, 16px);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-control {
+      border: 1px solid #333333;
+      padding: 6px 10px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+      cursor: pointer;
+      background: #000000;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-control:hover {
+      border-color: #666666;
+      background: #111111;
+    }
+
+    .header-row-2 {
+      padding: 6px 24px 8px 24px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: #888888;
+      letter-spacing: 0.1em;
+      line-height: 1.4;
+      white-space: normal;
+      word-break: break-word;
+      text-transform: uppercase;
+    }
+    @media (min-width: 768px) {
+      .header-row-2 {
+        padding: 6px 48px 8px 48px;
+      }
+    }
+
+    /* ==========================================================================
+       MENU OVERLAY (FULL SCREEN OPAQUE BLACK)
+       Default: display: none; only opens with .is-open class
+       ========================================================================== */
+    #menuOverlay {
+      display: none; /* Mandatory default */
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background-color: #000000;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+    }
+    #menuOverlay.is-open {
+      display: flex;
+    }
+    @media (min-width: 768px) {
+      #menuOverlay {
+        padding: 48px;
+      }
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #222222;
+    }
+
+    .menu-brand {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #888888;
+    }
+
+    .menu-close-btn {
+      border: 1px solid #444444;
+      padding: 8px 14px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #FFFFFF;
+      cursor: pointer;
+      background: #000000;
+    }
+    .menu-close-btn:hover {
+      background: #FFFFFF;
+      color: #000000;
+    }
+
+    .menu-nav-list {
+      list-style: none;
+      margin: 40px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .menu-nav-list {
+        gap: 28px;
+      }
+    }
+
+    .menu-nav-item a {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      color: #FFFFFF;
+      font-size: clamp(18px, 4.5vw, 32px);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      border-bottom: 1px solid #141414;
+      padding-bottom: 12px;
+      transition: color 0.2s ease, padding-left 0.2s ease;
+    }
+    .menu-nav-item a:hover {
+      color: #888888;
+      padding-left: 8px;
+    }
+    .menu-nav-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: #666666;
+    }
+
+    .menu-footer-index {
+      border-top: 1px solid #222222;
+      padding-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: #666666;
+      letter-spacing: 0.08em;
+    }
+    @media (min-width: 640px) {
+      .menu-footer-index {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ==========================================================================
+       SECTIONS & SPACING
+       ========================================================================== */
+    main {
+      padding-top: 130px; /* Generous top padding for fixed header */
+    }
+
+    section {
+      scroll-margin-top: 110px;
+      padding: 64px 0;
+      border-bottom: 1px solid #1F1F1F;
+    }
+    @media (min-width: 768px) {
+      section {
+        padding: 96px 0;
+      }
+    }
+
+    .section-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: #8E8E8E;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    h1, h2, h3 {
+      color: #FFFFFF;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: #8E8E8E;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 7vw, 64px);
+      margin-bottom: 24px;
+      max-width: 900px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: #D4D4D4;
+      max-width: 760px;
+      line-height: 1.5;
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+
+    .hero-anchor-box {
+      border-left: 2px solid #FFFFFF;
+      padding-left: 16px;
+      margin-bottom: 40px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: #8E8E8E;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      border: 1px solid #FFFFFF;
+      background: #FFFFFF;
+      color: #000000;
+      padding: 14px 28px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+    }
+    .btn-primary:hover {
+      background: #000000;
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+    }
+
+    /* Hero Swiss Catalog Index Grid (Fix for collision on tablets) */
+    .hero-catalog-grid {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid #242424;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    @media (min-width: 768px) {
+      .hero-catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px 48px;
+      }
+    }
+
+    .catalog-col-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: #666666;
+      letter-spacing: 0.12em;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .catalog-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 8px 0;
+      border-bottom: 1px solid #141414;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #A0A0A0;
+    }
+    .catalog-item-code {
+      color: #FFFFFF;
+      font-weight: 500;
+      margin-right: 12px;
+    }
+
+    /* ==========================================================================
+       SECTION 01: PERSPECTIVE
+       ========================================================================== */
+    .perspective-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    @media (min-width: 992px) {
+      .perspective-grid {
+        grid-template-columns: 5fr 7fr;
+        gap: 56px;
+      }
+    }
+
+    .perspective-heading {
+      font-size: clamp(24px, 4vw, 36px);
+      line-height: 1.3;
+    }
+
+    .perspective-body {
+      font-size: clamp(15px, 2vw, 17px);
+      color: #C0C0C0;
+      line-height: 1.7;
+    }
+
+    /* ==========================================================================
+       SECTION 02: TWO PATHWAYS
+       ========================================================================== */
+    .pathways-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    @media (min-width: 768px) {
+      .pathways-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .pathway-card {
+      background: #0A0A0A;
+      border: 1px solid #242424;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .pathway-code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: #888888;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .pathway-title {
+      font-size: 22px;
+      margin-bottom: 16px;
+      color: #FFFFFF;
+    }
+
+    .pathway-lead {
+      font-size: 14px;
+      color: #CCCCCC;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .pathway-focus-box {
+      border-top: 1px solid #1F1F1F;
+      padding-top: 16px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #888888;
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       SECTION 03: THE V2 METHOD (ACCORDION)
+       ========================================================================== */
+    .method-header-text {
+      font-size: clamp(22px, 3.5vw, 32px);
+      margin-bottom: 40px;
+    }
+
+    .accordion-list {
+      border-top: 1px solid #242424;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid #242424;
+      background: #000000;
+      transition: background 0.2s ease;
+    }
+
+    .accordion-header {
+      width: 100%;
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .accordion-header-left {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .accordion-code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: #888888;
+      white-space: nowrap;
+    }
+
+    .accordion-title-text {
+      font-size: 18px;
+      font-weight: 500;
+      color: #FFFFFF;
+    }
+
+    .accordion-icon {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 18px;
+      color: #888888;
+      margin-left: 16px;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0, 1, 0, 1), padding 0.3s ease;
+      padding: 0 0 0 0;
+      color: #B0B0B0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .accordion-item.is-open .accordion-content {
+      max-height: 300px; /* Sufficient for text */
+      padding: 0 0 24px 0;
+    }
+
+    .accordion-item.is-open .accordion-title-text {
+      color: #FFFFFF;
+    }
+
+    .accordion-item.is-open .accordion-icon::after {
+      content: "—";
+    }
+    .accordion-item:not(.is-open) .accordion-icon::after {
+      content: "+";
+    }
+
+    /* ==========================================================================
+       SECTION 04: GOVERNANCE
+       ========================================================================== */
+    .governance-title {
+      font-size: clamp(22px, 3.5vw, 32px);
+      margin-bottom: 40px;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+    @media (min-width: 768px) {
+      .pillars-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .pillar-card {
+      border: 1px solid #242424;
+      background: #0A0A0A;
+      padding: 24px;
+    }
+
+    .pillar-title {
+      font-size: 16px;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .pillar-body {
+      font-size: 13px;
+      color: #AAAAAA;
+      line-height: 1.6;
+    }
+
+    .credentials-placeholder {
+      border: 1px dashed #333333;
+      padding: 16px 20px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #777777;
+      text-align: center;
+      background: #050505;
+    }
+
+    /* ==========================================================================
+       SECTION 05: PRIVATE INQUIRY & PHOTO FRAME (space.jpg)
+       ========================================================================== */
+    .inquiry-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    @media (min-width: 992px) {
+      .inquiry-grid {
+        grid-template-columns: 5fr 7fr;
+        gap: 56px;
+      }
+    }
+
+    /* Left Column: Architectural Photo Frame */
+    .photo-frame-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .photo-frame {
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border: 1px solid #242424;
+      background: #080808;
+      position: relative;
+      width: 100%;
+    }
+
+    #spacePhoto {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 18% 35%;
+      transform: scale(1.1);
+      transform-origin: left center;
+      filter: grayscale(100%) contrast(1.08) brightness(0.92);
+      display: block;
+    }
+
+    /* Elegant Fallback Overlay when image is missing or loading locally */
+    .photo-fallback-overlay {
+      position: absolute;
+      inset: 0;
+      background: #0A0A0A;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      border: 1px solid #242424;
+      z-index: 2;
+    }
+
+    .fallback-header {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #888888;
+      letter-spacing: 0.1em;
+    }
+
+    .fallback-note {
+      font-size: 12px;
+      color: #888888;
+      line-height: 1.6;
+    }
+
+    .fallback-action-btn {
+      border: 1px solid #444444;
+      background: #111111;
+      color: #FFFFFF;
+      padding: 10px 14px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s ease;
+    }
+    .fallback-action-btn:hover {
+      background: #222222;
+      border-color: #666666;
+    }
+
+    .photo-caption {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: #777777;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Right Column: Contact Form */
+    .inquiry-form-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .inquiry-title {
+      font-size: clamp(24px, 4vw, 36px);
+      margin-bottom: 8px;
+    }
+
+    .inquiry-subtext {
+      font-size: 14px;
+      color: #AAAAAA;
+      line-height: 1.6;
+    }
+
+    .referrer-note {
+      font-size: 12px;
+      color: #777777;
+      border-left: 2px solid #333333;
+      padding-left: 12px;
+      margin-top: 4px;
+    }
+
+    .inquiry-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #888888;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: #0A0A0A;
+      border: 1px solid #242424;
+      padding: 12px 14px;
+      font-size: 14px;
+      color: #FFFFFF;
+      transition: border-color 0.2s ease;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: #666666;
+      background: #0F0F0F;
+    }
+
+    .form-select option {
+      background-color: #0A0A0A;
+      color: #FFFFFF;
+    }
+
+    .pics-notice {
+      font-size: 11px;
+      color: #666666;
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+
+    .form-submit-btn {
+      width: 100%;
+      border: 1px solid #FFFFFF;
+      background: #FFFFFF;
+      color: #000000;
+      padding: 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+    }
+    .form-submit-btn:hover {
+      background: #000000;
+      color: #FFFFFF;
+    }
+
+    /* Receipt Confirmation Box (Inline without alert) */
+    .receipt-box {
+      display: none;
+      background: #0A0A0A;
+      border: 1px solid #444444;
+      padding: 24px;
+      margin-top: 16px;
+    }
+    .receipt-box.is-visible {
+      display: block;
+    }
+
+    .receipt-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+      letter-spacing: 0.08em;
+    }
+
+    .receipt-text {
+      font-size: 13px;
+      color: #AAAAAA;
+      line-height: 1.5;
+    }
+
+    .whatsapp-desk-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #888888;
+      text-decoration: underline;
+      margin-top: 16px;
+      transition: color 0.2s ease;
+    }
+    .whatsapp-desk-link:hover {
+      color: #FFFFFF;
+    }
+
+    /* ==========================================================================
+       FOOTER & MODALS
+       ========================================================================== */
+    footer {
+      padding: 48px 0;
+      background: #000000;
+      border-top: 1px solid #1F1F1F;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #666666;
+    }
+
+    .footer-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .footer-grid {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-modal-link {
+      color: #888888;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .footer-modal-link:hover {
+      color: #FFFFFF;
+    }
+
+    .disclaimer-box {
+      max-width: 700px;
+      font-size: 10px;
+      color: #555555;
+      line-height: 1.5;
+      margin-top: 16px;
+    }
+
+    /* Opaque Solid Black Modals */
+    .modal-backdrop {
+      display: none; /* Mandatory default */
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background-color: #000000;
+      overflow-y: auto;
+      padding: 32px 24px;
+    }
+    .modal-backdrop.is-open {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-container {
+      background: #0A0A0A;
+      border: 1px solid #242424;
+      width: 100%;
+      max-width: 640px;
+      padding: 32px;
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      border: 1px solid #333333;
+      padding: 4px 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+    .modal-close-btn:hover {
+      background: #FFFFFF;
+      color: #000000;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+      padding-right: 40px;
+    }
+
+    .modal-body {
+      font-size: 13px;
+      color: #B0B0B0;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+
+<body class="lang-zh">
+
+  <!-- ==========================================================================
+       FIXED TWO-ROW HEADER
+       ========================================================================== -->
+  <header class="header-fixed">
+    <!-- Row 1: Logo & Controls -->
+    <div class="header-row-1">
+      <div class="brand-logo">VVWG | V2 WELLNESS GROUP</div>
+      <div class="header-controls">
+        <button type="button" class="btn-control" id="langToggleBtn" onclick="toggleLanguage()">EN / 繁</button>
+        <button type="button" class="btn-control" onclick="openMenu()">MENU</button>
+      </div>
+    </div>
+    <!-- Row 2: Micro-Metadata -->
+    <div class="header-row-2">
+      TST · HK · MEASURE, NOT DIAGNOSE.
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       FULL-SCREEN MENU OVERLAY
+       ========================================================================== -->
+  <div id="menuOverlay" aria-modal="true" role="dialog">
+    <div class="menu-header">
+      <div class="menu-brand">VVWG INDEX // MENU</div>
+      <button type="button" class="menu-close-btn" onclick="closeMenu()">CLOSE [×]</button>
+    </div>
+
+    <ul class="menu-nav-list">
+      <li class="menu-nav-item">
+        <a href="#perspective" onclick="closeMenu()">
+          <span class="menu-nav-num">01 /</span>
+          <span class="lang-zh">PERSPECTIVE // 視角與哲學</span>
+          <span class="lang-en">PERSPECTIVE</span>
+        </a>
+      </li>
+      <li class="menu-nav-item">
+        <a href="#pathways" onclick="closeMenu()">
+          <span class="menu-nav-num">02 /</span>
+          <span class="lang-zh">TWO PATHWAYS // 雙軌方案</span>
+          <span class="lang-en">TWO PATHWAYS</span>
+        </a>
+      </li>
+      <li class="menu-nav-item">
+        <a href="#method" onclick="closeMenu()">
+          <span class="menu-nav-num">03 /</span>
+          <span class="lang-zh">THE V2 METHOD // V2 方法論</span>
+          <span class="lang-en">THE V2 METHOD</span>
+        </a>
+      </li>
+      <li class="menu-nav-item">
+        <a href="#governance" onclick="closeMenu()">
+          <span class="menu-nav-num">04 /</span>
+          <span class="lang-zh">GOVERNANCE // 專業原則與邊界</span>
+          <span class="lang-en">GOVERNANCE</span>
+        </a>
+      </li>
+      <li class="menu-nav-item">
+        <a href="#inquiry" onclick="closeMenu()">
+          <span class="menu-nav-num">05 /</span>
+          <span class="lang-zh">PRIVATE INQUIRY // 預約及轉介</span>
+          <span class="lang-en">PRIVATE INQUIRY</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="menu-footer-index">
+      <div>
+        <strong>PATHWAYS INDEX</strong><br>
+        V2P—01 Performance & Metabolic Optimization<br>
+        V2P—02 Health Capital & Functional Reserve
+      </div>
+      <div>
+        <strong>METHOD PROTOCOL</strong><br>
+        V2M—01 Diagnostic Baseline · V2M—02 Normative Scoring<br>
+        V2M—03 Structured Active/Passive · V2M—04 16-Session Cycle
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION
+         ========================================================================== -->
+    <section id="hero">
+      <div class="container">
+        <span class="hero-eyebrow">
+          <span class="lang-zh">香港私人長壽與人體表現實踐機構</span>
+          <span class="lang-en">PRIVATE LONGEVITY & HUMAN PERFORMANCE PRACTICE · HONG KONG</span>
+        </span>
+
+        <h1 class="hero-title">
+          <span class="lang-zh">拿回身體自主權。</span>
+          <span class="lang-en">Reclaim Your Body.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          <span class="lang-zh">為你所渴望的生活建立身體方案。以客觀生理基線、結構化教練判斷及可驗證的機能儲備為本。</span>
+          <span class="lang-en">A plan for the life you want to live. Built on objective baselines, structured coaching, and measurable physiological reserve.</span>
+        </p>
+
+        <div class="hero-anchor-box">
+          <span class="lang-zh">只作精準量度，不作醫療診斷。</span>
+          <span class="lang-en">Measure, not diagnose.</span>
+        </div>
+
+        <a href="#inquiry" class="btn-primary">
+          <span class="lang-zh">預約初步基線評估 →</span>
+          <span class="lang-en">Request Private Assessment →</span>
+        </a>
+
+        <!-- Hero Swiss Catalog Index Grid -->
+        <div class="hero-catalog-grid">
+          <div>
+            <div class="catalog-col-title">PATHWAYS INDEX</div>
+            <div class="catalog-item">
+              <span><span class="catalog-item-code">V2P—01</span> Performance & Metabolic Optimization</span>
+              <span class="lang-zh">表現與代謝</span>
+              <span class="lang-en">Performance</span>
+            </div>
+            <div class="catalog-item">
+              <span><span class="catalog-item-code">V2P—02</span> Health Capital & Functional Reserve</span>
+              <span class="lang-zh">健康資本</span>
+              <span class="lang-en">Reserve</span>
+            </div>
+          </div>
+          <div>
+            <div class="catalog-col-title">METHOD PROTOCOL</div>
+            <div class="catalog-item">
+              <span><span class="catalog-item-code">V2M—01</span> Diagnostic Baseline</span>
+              <span class="lang-zh">基線採集</span>
+              <span class="lang-en">Baseline</span>
+            </div>
+            <div class="catalog-item">
+              <span><span class="catalog-item-code">V2M—02</span> Normative Scoring & Limiting Factor</span>
+              <span class="lang-zh">短板鎖定</span>
+              <span class="lang-en">Scoring</span>
+            </div>
+            <div class="catalog-item">
+              <span><span class="catalog-item-code">V2M—03</span> Structured Active & Passive Protocol</span>
+              <span class="lang-zh">雙軌介入</span>
+              <span class="lang-en">Protocol</span>
+            </div>
+            <div class="catalog-item">
+              <span><span class="catalog-item-code">V2M—04</span> 16-Session Cycle & Re-assessment</span>
+              <span class="lang-zh">同條件複測</span>
+              <span class="lang-en">Delta Check</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 01: PERSPECTIVE
+         ========================================================================== -->
+    <section id="perspective">
+      <div class="container">
+        <span class="section-tag">01 / PERSPECTIVE</span>
+        
+        <div class="perspective-grid">
+          <h2 class="perspective-heading">
+            <span class="lang-zh">運動表現與長遠健康，本質上是同一條公式：生理儲備。</span>
+            <span class="lang-en">Performance and longevity are the same equation: Physiological Reserve.</span>
+          </h2>
+
+          <p class="perspective-body">
+            <span class="lang-zh">市面上多數訓練方案依賴直覺、千篇一律的課表或短期高強度消耗。V2 Wellness Group 將體能視作長遠的「健康資本」。無論你正備戰一場耐力賽事，還是希望未來數十年維持獨立出行的自由，真正的瓶頸從來不是意志力，而是心肺與血管、肌力與下肢、平衡與穩定、身體組成四個領域中最短的那塊木板。</span>
+            <span class="lang-en">Most training programs rely on guesswork, generic templates, or short-term intensity. At V2 Wellness Group, we treat physical capacity as long-term health capital. Whether you are preparing for an endurance milestone or preserving independent mobility for the decades ahead, the limiting factor is never motivation—it is the weakest link across your cardiorespiratory capacity, lower-body strength, balance, and body composition.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 02: TWO PATHWAYS
+         ========================================================================== -->
+    <section id="pathways">
+      <div class="container">
+        <span class="section-tag">02 / TWO PATHWAYS</span>
+
+        <div class="pathways-grid">
+          <!-- Card A -->
+          <div class="pathway-card">
+            <div>
+              <div class="pathway-code">V2P—01</div>
+              <h3 class="pathway-title">
+                <span class="lang-zh">表現與代謝上限</span>
+                <span class="lang-en">Performance & Metabolic Optimization</span>
+              </h3>
+              <p class="pathway-lead">
+                <span class="lang-zh">為高管、耐力跑手及專業人士而設，在有限時間與高壓行程下，建立可持續的體能上限。</span>
+                <span class="lang-en">For executives, endurance athletes, and professionals optimizing output under real-world schedules.</span>
+              </p>
+            </div>
+            <div class="pathway-focus-box">
+              <strong><span class="lang-zh">核心聚焦：</span><span class="lang-en">FOCUS:</span></strong><br>
+              <span class="lang-zh">代謝效率與有氧閾值鎖定 · 力量輸出與抗傷韌性 · 主動訓練與被動修復配比</span>
+              <span class="lang-en">Metabolic efficiency & aerobic thresholds · Force production & injury resilience · Structured recovery integration</span>
+            </div>
+          </div>
+
+          <!-- Card B -->
+          <div class="pathway-card">
+            <div>
+              <div class="pathway-code">V2P—02</div>
+              <h3 class="pathway-title">
+                <span class="lang-zh">健康資本與機能儲備</span>
+                <span class="lang-en">Health Capital & Functional Reserve</span>
+              </h3>
+              <p class="pathway-lead">
+                <span class="lang-zh">建立機能儲備，而非被動補救——為未來數十年守住肌力、平衡穩定與生活自主權。</span>
+                <span class="lang-en">Building functional reserve, not damage limitation—preserving strength, stability, and autonomy for the decades ahead.</span>
+              </p>
+            </div>
+            <div class="pathway-focus-box">
+              <strong><span class="lang-zh">核心聚焦：</span><span class="lang-en">FOCUS:</span></strong><br>
+              <span class="lang-zh">心肺耐力與步態穩定 · 下肢肌力與防跌安全邊際 · 清晰透明的雙層進度報告</span>
+              <span class="lang-en">Cardiorespiratory & gait endurance · Lower-body power & fall resilience · Clear progress documentation for clients and families</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 03: THE V2 METHOD
+         ========================================================================== -->
+    <section id="method">
+      <div class="container">
+        <span class="section-tag">03 / THE V2 METHOD</span>
+
+        <h2 class="method-header-text">
+          <span class="lang-zh">由客觀基線，到可驗證的實測變化。</span>
+          <span class="lang-en">From objective baseline to verified delta.</span>
+        </h2>
+
+        <div class="accordion-list">
+          <!-- Item 1 (Open by default) -->
+          <div class="accordion-item is-open" id="acc-1">
+            <button type="button" class="accordion-header" onclick="toggleAccordion('acc-1')">
+              <div class="accordion-header-left">
+                <span class="accordion-code">V2M—01</span>
+                <span class="accordion-title-text">
+                  <span class="lang-zh">標準化基線採集</span>
+                  <span class="lang-en">Diagnostic Baseline</span>
+                </span>
+              </div>
+              <div class="accordion-icon"></div>
+            </button>
+            <div class="accordion-content">
+              <span class="lang-zh">於可重現的標準條件下，系統化採集代謝能力、身體結構、力量輸出與動作機能基線。</span>
+              <span class="lang-en">Comprehensive physiological and functional screening across metabolic capacity, body composition, strength, and movement mechanics—conducted under repeatable conditions.</span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="accordion-item" id="acc-2">
+            <button type="button" class="accordion-header" onclick="toggleAccordion('acc-2')">
+              <div class="accordion-header-left">
+                <span class="accordion-code">V2M—02</span>
+                <span class="accordion-title-text">
+                  <span class="lang-zh">常模對照與短板鎖定</span>
+                  <span class="lang-en">Normative Scoring & Limiting Factor</span>
+                </span>
+              </div>
+              <div class="accordion-icon"></div>
+            </button>
+            <div class="accordion-content">
+              <span class="lang-zh">對照已發表之常模研究，建構個人「健康資本指數（HCI）」，鎖定當下首要限制因子。</span>
+              <span class="lang-en">Benchmarked against published normative research to construct your Health Capital Index (HCI), isolating the primary bottleneck that governs your next phase.</span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="accordion-item" id="acc-3">
+            <button type="button" class="accordion-header" onclick="toggleAccordion('acc-3')">
+              <div class="accordion-header-left">
+                <span class="accordion-code">V2M—03</span>
+                <span class="accordion-title-text">
+                  <span class="lang-zh">主被動雙軌介入</span>
+                  <span class="lang-en">Structured Active & Passive Protocol</span>
+                </span>
+              </div>
+              <div class="accordion-icon"></div>
+            </button>
+            <div class="accordion-content">
+              <span class="lang-zh">數據本身並非方案。由專屬教練結合客觀指標與專業判斷制定階段性訓練，並僅在多項生理指標達標時，審慎配合被動修復模組。</span>
+              <span class="lang-en">Data alone is not a program. Your dedicated coach synthesizes objective findings into a phased training plan, integrating targeted recovery modalities strictly when physiological indicators warrant them.</span>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="accordion-item" id="acc-4">
+            <button type="button" class="accordion-header" onclick="toggleAccordion('acc-4')">
+              <div class="accordion-header-left">
+                <span class="accordion-code">V2M—04</span>
+                <span class="accordion-title-text">
+                  <span class="lang-zh">16 堂週期與同條件複測</span>
+                  <span class="lang-en">16-Session Cycle & Re-assessment</span>
+                </span>
+              </div>
+              <div class="accordion-icon"></div>
+            </button>
+            <div class="accordion-content">
+              <span class="lang-zh">每 16 堂為一個完整週期，透過同條件複測核對實測數值與真實變化（Δ），並標註可比性等級，絕不以百分比粉飾結果。</span>
+              <span class="lang-en">Every 16-session cycle concludes with a matched-condition re-assessment, reporting raw measured values and actual change (Δ) with explicit comparability ratings—never inflated percentages.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 04: GOVERNANCE
+         ========================================================================== -->
+    <section id="governance">
+      <div class="container">
+        <span class="section-tag">04 / GOVERNANCE</span>
+
+        <h2 class="governance-title">
+          <span class="lang-zh">透明標準，真人把關。</span>
+          <span class="lang-en">Transparent standards. Human accountability.</span>
+        </h2>
+
+        <div class="pillars-grid">
+          <!-- Pillar 1 -->
+          <div class="pillar-card">
+            <h3 class="pillar-title">
+              <span class="lang-zh">反黑盒原則</span>
+              <span class="lang-en">No Black Boxes</span>
+            </h3>
+            <p class="pillar-body">
+              <span class="lang-zh">所有常模錨點均附公開文獻來源；實測數據與推算數值嚴格分級標示。</span>
+              <span class="lang-en">Every normative benchmark cites its published source. Measured values are strictly separated from estimates.</span>
+            </p>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="pillar-card">
+            <h3 class="pillar-title">
+              <span class="lang-zh">雙軌把關</span>
+              <span class="lang-en">Coach Oversight</span>
+            </h3>
+            <p class="pillar-body">
+              <span class="lang-zh">系統協助整理數據，但所有方案判斷、安全紅線與報告發佈，均由專屬教練親自審核簽署。</span>
+              <span class="lang-en">Technology structures the data; our coaches own every coaching decision, safety boundary, and report release.</span>
+            </p>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="pillar-card">
+            <h3 class="pillar-title">
+              <span class="lang-zh">清晰專業邊界</span>
+              <span class="lang-en">Clear Scope of Practice</span>
+            </h3>
+            <p class="pillar-body">
+              <span class="lang-zh">本中心不提供醫療診斷或物理治療。如出現醫學紅旗，我們會先作轉介，並在取得醫生書面許可後方展開訓練。</span>
+              <span class="lang-en">We do not provide medical diagnosis or physiotherapy. Where medical red flags arise, we refer first and proceed only with your physician's written clearance.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="credentials-placeholder">
+          <span class="lang-zh">【佔位：團隊實際持有之專業資歷一句】</span>
+          <span class="lang-en">[PLACEHOLDER — Factual line of team credentials & certifications]</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 05: PRIVATE INQUIRY & ARCHITECTURAL PHOTO
+         ========================================================================== -->
+    <section id="inquiry">
+      <div class="container">
+        <span class="section-tag">05 / PRIVATE INQUIRY</span>
+
+        <div class="inquiry-grid">
+          <!-- Left Column: Architectural Photo Frame for space.jpg -->
+          <div class="photo-frame-container">
+            <div class="photo-frame" id="photoFrame">
+              <img id="spacePhoto" src="space.jpg" alt="V2 Wellness Group Tsim Sha Tsui Private Practice" onload="onImageSuccess()" onerror="onImageError()" />
+              
+              <!-- Fallback Overlay if space.jpg is missing locally -->
+              <div class="photo-fallback-overlay" id="fallbackOverlay">
+                <div>
+                  <div class="fallback-header">FIG. 01 — SPACE.JPG</div>
+                  <div style="height: 12px;"></div>
+                  <p class="fallback-note">
+                    <span class="lang-zh">提示：將 <strong>space.jpg</strong> 放在同一 GitHub 資料夾即可自動載入相片。</span>
+                    <span class="lang-en">Note: Place <strong>space.jpg</strong> in the same GitHub repository folder to load automatically.</span>
+                  </p>
+                </div>
+
+                <div>
+                  <button type="button" class="fallback-action-btn" onclick="document.getElementById('localFileInput').click()">
+                    <span class="lang-zh">［ 即時選擇本地相片預覽 ］</span>
+                    <span class="lang-en">[ Choose Local Photo to Test Preview ]</span>
+                  </button>
+                  <input type="file" id="localFileInput" accept="image/*" style="display: none;" onchange="loadLocalImage(event)" />
+                </div>
+              </div>
+            </div>
+            
+            <div class="photo-caption">
+              FIG. 01 — TSIM SHA TSUI PRIVATE PRACTICE · HK
+            </div>
+          </div>
+
+          <!-- Right Column: Inquiry Form -->
+          <div class="inquiry-form-wrapper">
+            <div>
+              <h2 class="inquiry-title">
+                <span class="lang-zh">採預約及轉介制。</span>
+                <span class="lang-en">By appointment and referral.</span>
+              </h2>
+              <p class="inquiry-subtext">
+                <span class="lang-zh">V2 Wellness Group 於香港尖沙咀以低密度私人執業模式運作。請留下聯絡資料，我們的團隊將與你安排初步諮詢及基線評估。</span>
+                <span class="lang-en">V2 Wellness Group operates as a low-density private practice in Tsim Sha Tsui, Hong Kong. Submit your details below to arrange an initial consultation and baseline screening.</span>
+              </p>
+              <div class="referrer-note">
+                <span class="lang-zh">如無轉介人，請於「簡述目標或現況」欄說明查詢緣由。</span>
+                <span class="lang-en">If you do not have a referrer, please briefly state the reason for your enquiry in the context field below.</span>
+              </div>
+            </div>
+
+            <form class="inquiry-form" id="inquiryForm" onsubmit="handleFormSubmit(event)">
+              <div class="form-group">
+                <label class="form-label">
+                  <span class="lang-zh">稱呼 / Name *</span>
+                  <span class="lang-en">Name *</span>
+                </label>
+                <input type="text" class="form-input" required placeholder="e.g. Mr. Chan / 陳先生">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">
+                  <span class="lang-zh">聯絡方式 (WhatsApp / Email) *</span>
+                  <span class="lang-en">Contact (WhatsApp / Email) *</span>
+                </label>
+                <input type="text" class="form-input" required placeholder="+852 ... / name@domain.com">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">
+                  <span class="lang-zh">主要方向 / Primary Focus *</span>
+                  <span class="lang-en">Primary Focus *</span>
+                </label>
+                <select class="form-select" required>
+                  <option value="" disabled selected>— Please Select / 請選擇 —</option>
+                  <option value="pathway1">1. Performance & Metabolic Optimization / 表現與代謝上限</option>
+                  <option value="pathway2">2. Health Capital & Functional Reserve / 健康資本與機能儲備</option>
+                  <option value="consultation">3. Undecided / Baseline Consultation / 未確定 / 初步諮詢</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">
+                  <span class="lang-zh">轉介人（選填） / Referred By (Optional)</span>
+                  <span class="lang-en">Referred By (Optional)</span>
+                </label>
+                <input type="text" class="form-input" placeholder="Referrer Name / 轉介人姓名">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">
+                  <span class="lang-zh">簡述目標或現況（選填） / Brief Context (Optional)</span>
+                  <span class="lang-en">Brief Context (Optional)</span>
+                </label>
+                <textarea class="form-textarea" rows="3" placeholder="Brief details regarding goals or current training status..."></textarea>
+              </div>
+
+              <div class="pics-notice">
+                <span class="lang-zh">個人資料收集聲明：你所提供的資料僅作聯絡及安排評估之用，嚴格遵守香港《個人資料（私隱）條例》（PDPO）。</span>
+                <span class="lang-en">PICS Statement: Personal data provided will solely be used for communication and scheduling, strictly handled in accordance with HK PDPO.</span>
+              </div>
+
+              <button type="submit" class="form-submit-btn">
+                <span class="lang-zh">提交預約申請 →</span>
+                <span class="lang-en">Submit Private Inquiry →</span>
+              </button>
+            </form>
+
+            <!-- Inline Receipt Box -->
+            <div class="receipt-box" id="receiptBox">
+              <div class="receipt-title">
+                <span class="lang-zh">[ 申請已成功記錄 / INQUIRY RECORDED ]</span>
+                <span class="lang-en">[ INQUIRY RECORDED ]</span>
+              </div>
+              <div class="receipt-text">
+                <span class="lang-zh">多謝你的查詢。V2 Wellness Group 私人專案小組將於 24 小時內以 WhatsApp 或 Email 直接與你聯絡。</span>
+                <span class="lang-en">Thank you for your enquiry. The V2 Wellness Group private desk will reach out via WhatsApp or Email within 24 hours.</span>
+              </div>
+            </div>
+
+            <div>
+              <a href="https://wa.me/85200000000" target="_blank" rel="noopener noreferrer" class="whatsapp-desk-link">
+                <span>Direct WhatsApp Private Desk →</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-left">
+          <div>Tsim Sha Tsui, Hong Kong · By Appointment Only</div>
+          <div>
+            <span class="footer-modal-link" onclick="openModal('partnershipModal')">
+              Institutional & Strategic Partnerships →
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <div>© 2026 V2 Wellness Group. All rights reserved.</div>
+          <div style="margin-top: 4px;">
+            <span class="footer-modal-link" onclick="openModal('privacyModal')">
+              Privacy Policy (HK PDPO)
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="disclaimer-box">
+        DISCLAIMER: V2 Wellness Group provides physiological baseline screening and structured athletic coaching. We are not a medical clinic or physiotherapy practice and do not provide diagnosis or medical treatment. Clients with medical conditions require clear physician consent prior to participation.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODALS (SOLID BLACK OPAQUE)
+       ========================================================================== -->
+  <!-- Partnership Modal -->
+  <div class="modal-backdrop" id="partnershipModal">
+    <div class="modal-container">
+      <button type="button" class="modal-close-btn" onclick="closeModal('partnershipModal')">CLOSE [×]</button>
+      <h3 class="modal-title">Institutional & Strategic Partnerships</h3>
+      <div class="modal-body">
+        V2 Wellness Group collaborates with corporate health funds, executive health desks, and specialized medical practitioners to provide objective physical reserve assessment for leadership teams and referral clients.<br><br>
+        For institutional inquiries or practitioner cross-referrals, please write directly to our desk at <strong>partnerships@v2wellness.hk</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Policy Modal -->
+  <div class="modal-backdrop" id="privacyModal">
+    <div class="modal-container">
+      <button type="button" class="modal-close-btn" onclick="closeModal('privacyModal')">CLOSE [×]</button>
+      <h3 class="modal-title">Privacy Policy Statement (HK PDPO)</h3>
+      <div class="modal-body">
+        In compliance with the Personal Data (Privacy) Ordinance (Cap. 486) of Hong Kong:<br><br>
+        1. <strong>Purpose of Collection:</strong> All personal data collected via this inquiry form is used strictly for scheduling consultations, assessing suitability, and providing client support.<br>
+        2. <strong>Data Security:</strong> We enforce strict confidentiality standards. Client information is never sold, traded, or shared with third-party marketing entities.<br>
+        3. <strong>Data Access:</strong> You reserve the right to request access to or correction of your personal data maintained by V2 Wellness Group by contacting privacy@v2wellness.hk.
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <script>
+    // 1. Bilingual Language Switcher
+    function toggleLanguage() {
+      const body = document.body;
+      const btn = document.getElementById('langToggleBtn');
+      if (body.classList.contains('lang-zh')) {
+        body.classList.remove('lang-zh');
+        body.classList.add('lang-en');
+        btn.textContent = '繁 / EN';
+      } else {
+        body.classList.remove('lang-en');
+        body.classList.add('lang-zh');
+        btn.textContent = 'EN / 繁';
+      }
+    }
+
+    // 2. Menu Overlay Controls
+    function openMenu() {
+      const menu = document.getElementById('menuOverlay');
+      menu.classList.add('is-open');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeMenu() {
+      const menu = document.getElementById('menuOverlay');
+      menu.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    // Close menu on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeMenu();
+        closeModal('partnershipModal');
+        closeModal('privacyModal');
+      }
+    });
+
+    // 3. Accordion Toggle logic
+    function toggleAccordion(id) {
+      const item = document.getElementById(id);
+      const isOpen = item.classList.contains('is-open');
+
+      // Close all items
+      document.querySelectorAll('.accordion-item').forEach(el => {
+        el.classList.remove('is-open');
+      });
+
+      // Toggle requested item
+      if (!isOpen) {
+        item.classList.add('is-open');
+      }
+    }
+
+    // 4. Photo Frame Image Fallback Logic
+    function onImageSuccess() {
+      const fallback = document.getElementById('fallbackOverlay');
+      if (fallback) {
+        fallback.style.display = 'none';
+      }
+    }
+
+    function onImageError() {
+      const fallback = document.getElementById('fallbackOverlay');
+      if (fallback) {
+        fallback.style.display = 'flex';
+      }
+    }
+
+    // Local file preview handler for local testing
+    function loadLocalImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById('spacePhoto');
+          img.src = e.target.result;
+          onImageSuccess();
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Initial check for photo image element on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const img = document.getElementById('spacePhoto');
+      if (img && img.complete && img.naturalWidth !== 0) {
+        onImageSuccess();
+      }
+    });
+
+    // 5. Form Submission Handler (Inline receipt without alert)
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const form = document.getElementById('inquiryForm');
+      const receipt = document.getElementById('receiptBox');
+      
+      form.style.opacity = '0.5';
+      form.style.pointerEvents = 'none';
+      
+      setTimeout(() => {
+        form.style.display = 'none';
+        receipt.classList.add('is-visible');
+      }, 400);
+    }
+
+    // 6. Modal Dialogs logic
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+    }
+  </script>
+</body>
+</html>
