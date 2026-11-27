@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#0F2C24">
 <title>VVWG | V2 WELLNESS GROUP — Tsim Sha Tsui Private Practice</title>
 <meta name="description" content="香港私人長壽與人體表現實踐機構。以客觀生理基線、結構化教練判斷及可驗證的機能儲備為本。只作精準量度，不作醫療診斷。">
-<meta property="og:title" content="VVWG | V2 WELLNESS GROUP — Tsim Sha Tsui Private Practice">
-<meta property="og:description" content="Private Longevity & Human Performance Practice in Hong Kong. Objective physiological baselines and structured coaching.">
+<meta property="og:title" content="V2 Wellness Group｜尖沙咀私人評估與訓練實踐機構">
+<meta property="og:description" content="先量度，再介入。首次基線評估，制定個人訓練計劃，並以健康資本指數追蹤進展。採預約及轉介制。">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://aiv2gs-maker.github.io/v2-preview/space.jpg">
 
@@ -1511,7 +1511,7 @@
         <span data-lang="zh">香港尖沙咀九龍公園徑 1 號裕華國際大廈 502 室</span>
         <span data-lang="en">Room 502, Yue Hwa International Building, 1 Kowloon Park Drive, Tsim Sha Tsui, Hong Kong</span>
       </span>
-      <a href="https://wa.me/85298595883" target="_blank" rel="noopener noreferrer">
+      <a href="https://wa.me/85298595883?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%20V2%20%E7%9A%84%E9%A6%96%E6%AC%A1%E5%9F%BA%E7%B7%9A%E8%A9%95%E4%BC%B0%E3%80%82" target="_blank" rel="noopener noreferrer">
         <span data-lang="zh">透過 WhatsApp 與我們聯絡 →</span>
         <span data-lang="en">Reach us on WhatsApp →</span>
       </a>
@@ -2059,8 +2059,8 @@
             <span class="faq-icon" aria-hidden="true">+</span>
           </summary>
           <p class="faq-answer">
-            <span data-lang="zh">本中心採預約及轉介制。你可以透過下方私密查詢表單留下資料，或直接透過 WhatsApp Concierge 與我們聯絡，團隊會儘快回覆並安排時間。如你已有醫生轉介、傷患或長期身體狀況，我們亦會與你的主診醫生或註冊物理治療師協作，安排合適的訓練起點。</span>
-            <span data-lang="en">We operate strictly by appointment and referral. Submit the private inquiry form below or message our WhatsApp Concierge directly—our team responds promptly to confirm arrangements. If you already have a physician's referral, an injury, or a long-term condition, we will also coordinate with your physician or registered physiotherapist to establish an appropriate starting point for training.</span>
+            <span data-lang="zh">本中心採預約及轉介制。你可以透過下方私密查詢表單留下資料，或直接透過 WhatsApp Concierge 與我們聯絡，團隊會儘快回覆並安排時間。如你已有醫生轉介、傷患或長期身體狀況，我們亦會與你的主診醫生或註冊物理治療師協作，安排合適的訓練起點；訓練期間亦可應你的要求並在你同意下，向主診醫生提供進度摘要。</span>
+            <span data-lang="en">We operate strictly by appointment and referral. Submit the private inquiry form below or message our WhatsApp Concierge directly—our team responds promptly to confirm arrangements. If you already have a physician's referral, an injury, or a long-term condition, we will also coordinate with your physician or registered physiotherapist to establish an appropriate starting point for training; during training, we can also provide progress summaries to your physician upon request and with your consent.</span>
           </p>
         </details>
       </div>
@@ -2092,7 +2092,7 @@
           </figure>
 
           <div>
-            <a href="https://wa.me/85298595883" target="_blank" rel="noopener noreferrer" class="underlined-link">
+            <a href="https://wa.me/85298595883?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%20V2%20%E7%9A%84%E9%A6%96%E6%AC%A1%E5%9F%BA%E7%B7%9A%E8%A9%95%E4%BC%B0%E3%80%82" target="_blank" rel="noopener noreferrer" class="underlined-link">
               <span data-lang="zh">希望先行了解？聯絡 WhatsApp Concierge →</span>
               <span data-lang="en">Prefer to talk first? Message our WhatsApp Concierge →</span>
             </a>
@@ -2304,7 +2304,11 @@
       }
 
       // Toggle between English and Traditional Chinese
+      var waPrefill = { zh: '你好，我想了解 V2 的首次基線評估。', en: 'Hello, I would like to learn about the Initial Baseline Assessment at V2.' };
       function setLanguage(lang) {
+        document.querySelectorAll('a[href^="https://wa.me/"]').forEach(function (a) {
+          a.href = 'https://wa.me/85298595883?text=' + encodeURIComponent(waPrefill[lang]);
+        });
         if (lang === 'zh') {
           body.classList.remove('lang-en');
           body.classList.add('lang-zh');
@@ -2339,12 +2343,16 @@
       if (contactInput) {
         contactInput.addEventListener('input', function () { contactInput.classList.remove('is-invalid'); });
       }
-      setLanguage('en');
+      var savedLang = null;
+      try { savedLang = localStorage.getItem('v2-lang'); } catch (e) {}
+      var browserIsZh = ((navigator.language || 'en').toLowerCase().indexOf('zh') === 0);
+      setLanguage(savedLang || (browserIsZh ? 'zh' : 'en'));
 
       if (langToggle) {
         langToggle.addEventListener('click', function () {
           const nextLang = body.classList.contains('lang-en') ? 'zh' : 'en';
           setLanguage(nextLang);
+          try { localStorage.setItem('v2-lang', nextLang); } catch (e) {}
         });
       }
 
