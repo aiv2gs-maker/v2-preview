@@ -462,7 +462,7 @@
   }
 
   .underlined-link--muted:hover {
-    color: var(--ink);
+    color: var(--accent);
     border-bottom-color: var(--accent);
   }
 
@@ -519,64 +519,16 @@
     }
   }
 
-  /* Hero 3-line Quick Guide (V26.1) */
-  .hero-quick-guide {
-    margin-top: 28px;
-    padding-top: 18px;
-    border-top: 1px solid var(--hairline);
-    max-width: 660px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .hero-quick-line {
-    position: relative;
-    padding-left: 14px;
-    font-size: 12px;
-    line-height: 1.55;
-    color: var(--ink-secondary);
-    margin: 0;
-  }
-
-  .hero-quick-line::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.62em;
-    width: 5px;
-    height: 1px;
-    background-color: var(--accent);
-  }
-
-  .hero-quick-line--primary {
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  @media (min-width: 768px) {
-    .hero-quick-guide {
-      margin-top: 40px;
-      padding-top: 22px;
-      gap: 9px;
-    }
-
-    .hero-quick-line {
-      font-size: 13px;
-    }
-  }
-
-  /* Editorial Sections (V26.1: 1px top hairline + balanced section rhythm) */
+  /* Editorial Sections */
   .editorial-section {
-    padding-top: 72px;
-    padding-bottom: 72px;
-    border-top: 1px solid var(--hairline);
+    padding-top: 112px;
+    padding-bottom: 48px;
   }
 
   @media (min-width: 768px) {
     .editorial-section {
-      padding-top: 104px;
-      padding-bottom: 104px;
+      padding-top: 148px;
+      padding-bottom: 64px;
     }
   }
 
@@ -599,15 +551,14 @@
     margin: 0 0 24px 0;
   }
 
-  .perspective-lead,
-  .section-lead {
+  .perspective-lead {
     max-width: 720px;
     font-size: clamp(16px, 2.2vw, 19px);
     font-weight: 500;
     line-height: 1.5;
     letter-spacing: -0.01em;
     color: var(--ink);
-    margin: 0 0 18px 0;
+    margin: 0 0 20px 0;
   }
 
   .body-copy {
@@ -769,14 +720,6 @@
     letter-spacing: -0.01em;
     color: var(--ink);
     margin: 0 0 12px 0;
-  }
-
-  .goal-fit {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.62;
-    color: var(--ink);
-    margin: 0 0 10px 0;
   }
 
   .goal-desc {
@@ -1160,7 +1103,7 @@
 
   /* Footer */
   .site-footer {
-    margin-top: 0;
+    margin-top: 48px;
     padding-top: 56px;
     padding-bottom: 64px;
     padding-bottom: calc(64px + env(safe-area-inset-bottom));
@@ -1169,7 +1112,7 @@
 
   @media (min-width: 768px) {
     .site-footer {
-      margin-top: 0;
+      margin-top: 64px;
       padding-top: 64px;
       padding-bottom: 72px;
     }
@@ -1374,9 +1317,9 @@
     padding-top: 12px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--ink-muted);
   }
-  .space-interlude + #perspective { padding-top: 72px; border-top: none; }
+  .space-interlude + #perspective { padding-top: 84px; }
   @media (min-width: 768px) {
-    .space-interlude + #perspective { padding-top: 104px; }
+    .space-interlude + #perspective { padding-top: 112px; }
   }
 </style>
 </head>
@@ -1622,21 +1565,6 @@
           <span data-lang="en">Private Inquiry →</span>
         </a>
       </div>
-
-      <div class="hero-quick-guide" aria-label="Quick Overview">
-        <p class="hero-quick-line hero-quick-line--primary">
-          <span data-lang="zh">首次基線評估 → 個人計劃 → 階段訓練與複測</span>
-          <span data-lang="en">Initial assessment → Personal plan → Structured training and re-assessment</span>
-        </p>
-        <p class="hero-quick-line">
-          <span data-lang="zh">零運動經驗至特定目標，均可由同一個評估起點開始</span>
-          <span data-lang="en">From no training experience to specific goals, every journey starts with the same assessment.</span>
-        </p>
-        <p class="hero-quick-line">
-          <span data-lang="zh">書面計劃、訓練紀錄及具可比性複測，清楚交代每一步</span>
-          <span data-lang="en">A written plan, training records, and comparability-rated re-assessments make each step clear.</span>
-        </p>
-      </div>
     </section>
 
     <!-- Architectural Space Interlude (hidden until space-banner.jpg exists) -->
@@ -1685,14 +1613,9 @@
         <span data-lang="en">Wherever you start, you begin with the same assessment and delivery framework.</span>
       </h2>
 
-      <p class="section-lead">
-        <span data-lang="zh">你會獲得一份書面個人計劃、完整訓練紀錄，以及具可比性的定期複測結果。</span>
-        <span data-lang="en">You receive a written personal plan, structured training records, and comparability-rated re-assessment results.</span>
-      </p>
-
       <p class="body-copy">
-        <span data-lang="zh">V2 Wellness Group 不要求客戶按標籤自行選購預設方案。無論你是零運動經驗、未有明確方向，抑或具備特定目標，均由首次基線評估及適當的風險篩查開始，再按實測基線、可投入時間與教練判斷制定個人計劃。</span>
-        <span data-lang="en">V2 Wellness Group does not ask clients to self-select a pre-packaged program from a set of labels. Every client&mdash;whether new to structured training or pursuing a specific goal&mdash;begins with an Initial Baseline Assessment and appropriate risk screening, followed by a personal plan shaped by your measured baseline, available time, and coaching judgment.</span>
+        <span data-lang="zh">無論你是零運動經驗、未有明確方向，抑或具備特定目標，均由首次基線評估及適當的風險篩查開始，再按實測基線、可投入時間與教練判斷制定個人計劃。</span>
+        <span data-lang="en">Every client&mdash;whether new to structured training or pursuing a specific goal&mdash;begins with an Initial Baseline Assessment and appropriate risk screening, followed by a personal plan shaped by your measured baseline, available time, and coaching judgment.</span>
       </p>
 
       <div class="delivery-list">
@@ -1733,8 +1656,8 @@
             </h3>
           </div>
           <p class="delivery-output">
-            <span data-lang="zh">訓練內容、執行紀錄及教練調整</span>
-            <span data-lang="en">Structured sessions, training records, and coach adjustments</span>
+            <span data-lang="zh">肌力、帶氧及動作控制訓練；每堂執行紀錄及教練調整</span>
+            <span data-lang="en">Strength, aerobic, and movement-control training, with session records and coach adjustments</span>
           </p>
         </div>
 
@@ -1777,14 +1700,9 @@
         <span data-lang="en">Four defined applied pathways. One starting point.</span>
       </h2>
 
-      <p class="section-lead">
-        <span data-lang="zh">四個方向協助你對應自身現況，但所有客戶均由同一套基線評估開始。</span>
-        <span data-lang="en">These four pathways help orient your current priorities, while every client begins with the same baseline assessment.</span>
-      </p>
-
       <p class="body-copy">
-        <span data-lang="zh">以下是我們四個明確的應用方向，並非進入 V2 前必須自行對號入座的標籤，亦不排除其他個別需要。</span>
-        <span data-lang="en">These four defined pathways reflect core areas of applied practice. They are not labels you must assign to yourself before entering V2, nor do they exclude other individual needs.</span>
+        <span data-lang="zh">這些方向並非進入 V2 前必須自行對號入座的標籤，亦不排除其他個別需要。</span>
+        <span data-lang="en">These pathways are not labels you must assign to yourself before entering V2, nor do they exclude other individual needs.</span>
       </p>
 
       <div class="broad-entry-block">
@@ -1806,10 +1724,6 @@
               <span data-lang="zh">體重與代謝健康</span>
               <span data-lang="en">Weight &amp; Metabolic Health</span>
             </h3>
-            <p class="goal-fit">
-              <span data-lang="zh">想處理體重、腰圍或代謝健康，並建立可持續的訓練方向。</span>
-              <span data-lang="en">Looking to manage weight, waist circumference, or metabolic health with a sustainable training direction.</span>
-            </p>
             <p class="goal-desc">
               <span data-lang="zh">在體重管理過程中，建立體能、維持肌力，並配合可持續的飲食及生活習慣。</span>
               <span data-lang="en">Build fitness, maintain muscle, and establish sustainable nutrition and daily habits during weight management.</span>
@@ -1830,10 +1744,6 @@
               <span data-lang="zh">女性健康與更年期</span>
               <span data-lang="en">Women&rsquo;s Health &amp; Menopause</span>
             </h3>
-            <p class="goal-fit">
-              <span data-lang="zh">正經歷更年期前後的身體變化，關注肌力、體脂及日常狀態。</span>
-              <span data-lang="en">Navigating physical changes around menopause, with a focus on strength, body composition, and daily energy.</span>
-            </p>
             <p class="goal-desc">
               <span data-lang="zh">針對更年期前後的肌力、體能及活動能力需要，安排合適的評估與訓練。</span>
               <span data-lang="en">Tailored assessment and training for strength, fitness, and functional mobility before, during, and after menopause.</span>
@@ -1854,10 +1764,6 @@
               <span data-lang="zh">肌力、平衡與獨立生活</span>
               <span data-lang="en">Strength, Balance &amp; Independence</span>
             </h3>
-            <p class="goal-fit">
-              <span data-lang="zh">希望維持肌力、平衡及日常活動能力，為長遠獨立生活建立儲備。</span>
-              <span data-lang="en">Looking to maintain strength, balance, and daily function to build reserve for long-term independence.</span>
-            </p>
             <p class="goal-desc">
               <span data-lang="zh">加強下肢力量、平衡及日常活動能力，管理可介入的跌倒風險因素。</span>
               <span data-lang="en">Build lower-body strength, balance, and daily function while addressing modifiable fall-risk factors.</span>
@@ -1878,10 +1784,6 @@
               <span data-lang="zh">長跑表現</span>
               <span data-lang="en">Running Performance</span>
             </h3>
-            <p class="goal-fit">
-              <span data-lang="zh">希望提升跑步表現、訓練連貫性及比賽準備。</span>
-              <span data-lang="en">Looking to improve running performance, training consistency, and race preparation.</span>
-            </p>
             <p class="goal-desc">
               <span data-lang="zh">為 10K、半馬、全馬或個人跑步目標，找出目前限制表現的能力環節，制定專項訓練。</span>
               <span data-lang="en">For 10K, half marathon, marathon, or personal running goals, we identify the physical capacities currently limiting your performance and tailor your training accordingly.</span>
@@ -1907,19 +1809,14 @@
         <span data-lang="en">Four domains. One index.</span>
       </h2>
 
-      <p class="section-lead">
-        <span data-lang="zh">我們以四個公開常模領域建立 0–100 分客觀基線，讓你看清目前儲備與首要限制因子。</span>
-        <span data-lang="en">We establish a 0–100 objective baseline across four published normative domains, making your current reserve and primary limiting factor clear.</span>
-      </p>
-
       <p class="body-copy">
         <span data-lang="zh">四個核心領域中的指定評分錨點會匯聚成你的「健康資本指數（HCI）」——以 0 至 100 分綜合呈現，四個領域權重均等，並對照已發表之常模研究定位。這四個領域構成核心機能基線；表現與代謝上限方向按需要疊加的進階代謝與力量測試，僅作補充評估及教練判斷，不納入指數計分。</span>
         <span data-lang="en">Designated scoring anchors across four core domains form your Health Capital Index (HCI)—a composite score from 0 to 100, equally weighted across the domains and positioned against published normative research. These four domains establish the core capacity baseline. Advanced metabolic and strength testing may be added for the performance pathway to support supplementary assessment and coaching judgment; these results are not included in the index score.</span>
       </p>
 
       <p class="body-copy" style="margin-top: 16px;">
-        <span data-lang="zh">指數以可比較的機能能力為核心，只選用具公開常模支持的錨點；儀器原生綜合分數不作依據，單日狀態及中心以外監測另作過程記錄。</span>
-        <span data-lang="en">The index focuses on comparable functional capacity, using anchors supported by published normative research. Proprietary device summary scores are not used; single-day state and out-of-centre monitoring are recorded separately as process data.</span>
+        <span data-lang="zh">儀器原生綜合分數不作計分依據；單日狀態及中心以外監測，另作過程記錄，不納入指數。</span>
+        <span data-lang="en">Proprietary device summary scores are not used; single-day state and out-of-centre monitoring are recorded separately as process data and do not affect the score.</span>
       </p>
 
       <div class="index-domains-grid">
@@ -1932,8 +1829,8 @@
             </h3>
           </div>
           <p class="index-domain-desc">
-            <span data-lang="zh">六分鐘步行測試與一分鐘心率恢復——真實負荷下的循環耐力。前者以步行距離反映持續步行下的功能性有氧耐力，後者記錄停步後一分鐘的心率回落幅度。</span>
-            <span data-lang="en">Six-minute walk and one-minute heart-rate recovery&mdash;circulatory capacity under real demand. Walk distance reflects functional aerobic endurance during sustained walking, while one-minute recovery records the heart-rate drop after effort stops.</span>
+            <span data-lang="zh">六分鐘步行測試與一分鐘心率恢復——真實負荷下的循環耐力。</span>
+            <span data-lang="en">Six-minute walk and one-minute heart-rate recovery&mdash;circulatory capacity under real demand.</span>
           </p>
         </div>
 
@@ -1946,8 +1843,8 @@
             </h3>
           </div>
           <p class="index-domain-desc">
-            <span data-lang="zh">三十秒坐站測試與握力——下肢功能及整體力量的標準化參考指標。坐站次數記錄重複起坐能力；握力反映手及前臂抓握力量，並作為整體肌力的常用替代指標。</span>
-            <span data-lang="en">Thirty-second sit-to-stand and grip strength&mdash;standardized markers of lower-body function and overall strength. Sit-to-stand repetitions record repeated rising capacity, while grip strength measures hand and forearm force and serves as a widely used proxy for overall muscular strength.</span>
+            <span data-lang="zh">三十秒坐站測試與握力——下肢功能及整體力量的標準化指標。</span>
+            <span data-lang="en">Thirty-second sit-to-stand and grip strength&mdash;standardized markers of lower-body function and overall strength.</span>
           </p>
         </div>
 
@@ -1960,8 +1857,8 @@
             </h3>
           </div>
           <p class="index-domain-desc">
-            <span data-lang="zh">單腳站立測試——神經肌肉控制與姿勢穩定度。透過開眼單側支撐的維持秒數觀察靜態平衡表現，結果作為綜合評估及訓練判斷的參考。</span>
-            <span data-lang="en">Single-leg stance&mdash;neuromuscular control and postural stability. Eyes-open unilateral hold duration records static balance performance and informs the coach's broader assessment and training judgment.</span>
+            <span data-lang="zh">單腳站立測試——神經肌肉控制與姿勢穩定度。</span>
+            <span data-lang="en">Single-leg stance&mdash;neuromuscular control and postural stability.</span>
           </p>
         </div>
 
@@ -1974,8 +1871,8 @@
             </h3>
           </div>
           <p class="index-domain-desc">
-            <span data-lang="zh">腰圍、骨骼肌量與體脂率——身體結構的長期走勢。結合軟尺實測腰圍與儀器估算之肌脂讀數，補充單純體重未能呈現的身體組成變化。</span>
-            <span data-lang="en">Waist circumference, skeletal muscle mass, and body-fat percentage&mdash;the structural trajectory. Tape-measured waist circumference is combined with instrument-estimated skeletal muscle mass and body-fat percentage to track compositional changes not captured by scale weight alone.</span>
+            <span data-lang="zh">腰圍、骨骼肌量與體脂率——體重以外的身體結構走勢。</span>
+            <span data-lang="en">Waist circumference, skeletal muscle mass, and body-fat percentage&mdash;structural change beyond scale weight.</span>
           </p>
         </div>
       </div>
@@ -2145,8 +2042,8 @@
             <span class="faq-icon" aria-hidden="true">+</span>
           </summary>
           <p class="faq-answer">
-            <span data-lang="zh">我們不設劃一散堂價目表。完成初步基線評估後，方案會按你的實測結果、目標、行程及所需階段度身制定及報價。訓練期間設有固定複測節點；初步基線評估費用可於查詢時直接向團隊確認。</span>
-            <span data-lang="en">We do not publish a generic drop-in menu. After your Initial Baseline Assessment, your program is structured and quoted according to your measured baselines, goals, schedule, and required phases. Progress re-assessments are scheduled at defined review milestones; assessment fees are confirmed directly upon inquiry.</span>
+            <span data-lang="zh">我們不設劃一散堂價目表。所有方案均於完成初步基線評估後，按你的實測結果、目標及行程度身報價，堂數按訓練需要編排；初步基線評估之費用可於查詢時直接向團隊確認。</span>
+            <span data-lang="en">We do not publish a generic drop-in price list. Programs are quoted after your Initial Baseline Assessment, tailored to your measured baselines, goals, and schedule; program length follows your training needs. Assessment fees are confirmed directly upon inquiry.</span>
           </p>
         </details>
 
